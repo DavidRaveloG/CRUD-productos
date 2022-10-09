@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&display=swap%27');
+:root {
+  --primary: #e99401;
+  --negro: #262626;
+  --blanco: #FFF;
+  --fuente-principal: 'Raleway', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  font-size: 2rem;
+  font-family: var(--fuente-principal);
+  line-height: 1.5;
+  background-color: rgb(197, 202, 233  );
+  color: rgb(40, 53, 147);
+}
+img {
+  max-width: 100%;
+}
+a{
+  text-decoration: none;
+}
+
+[class*="contenedor"] {
+  max-width: 120rem;
+  margin: 0 auto;
+  width: 95%;
+}
+[class*="heading"] {
+  font-size: 4rem;
+  text-align: center;
+  font-weight: 900;
+  color: rgb(13, 8, 14);
+  margin: 5rem 0;
+}
+[class*="btn"]{
+  border: 1px solid rgb(63, 81, 181 ); /*anchura, estilo y color borde*/
+  padding: 10px; /*espacio alrededor texto*/
+  background-color: rgb(63, 81, 181 ); /*color botón*/
+  color: rgb(255,255,255); /*color texto*/
+  text-decoration: none; /*decoración texto*/
+  text-transform: uppercase; /*capitalización texto*/
+  font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+  border-radius: 50px; /*bordes redondos*/
+  transition: background-color .3s ease-out;
+  cursor: pointer;
+}
+.btn:hover{
+  background-color: rgb(159, 168, 218); /*color botón*/
+}

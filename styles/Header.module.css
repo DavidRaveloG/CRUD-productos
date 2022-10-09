@@ -1,0 +1,62 @@
+/*Contenedor header*/
+.head{
+    display: grid; 
+    grid-template-columns: 3fr 4fr;
+    background-color: rgb(255,255,255) ;
+    padding: 0 0 0 1rem;
+    margin: 2rem 12rem 0 12rem;
+}
+.first{
+    display: flex;
+}
+.title{
+    padding:0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+/*links*/
+.links{
+    flex-grow: 1;
+    display: flex;
+    color:rgb(56, 190, 190);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+    -webkit-box-align: stretch;
+}
+.links li{
+    flex-grow: 1;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    transition: background-color .3s ease-in;
+}
+.links a{
+    color: rgb(17, 12, 22);
+    display: block;
+    text-align: center;
+    padding-top: 2rem;
+    margin: 0;
+}
+.links li:hover{
+   background-color: rgb(232, 234, 246  );
+}
+.login{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.login_link{
+    display: flex;
+    align-items: center;
+    padding: 2.2rem;
+    margin: 0;
+    height: 100%;
+}
+.login_link:hover{
+    background-color: rgb(232, 234, 246 );
+}
+
