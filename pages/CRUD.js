@@ -14,41 +14,66 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { async } from "@firebase/util";
+import factory from "../abstract_factory/Factories/ProductsFactory";
+import MasterCardFactory from "../abstract_factory/Factories/masterCardFactory";
+import VisaFactory from "../abstract_factory/Factories/VisaFactory";
+import PaypalFactory from "../abstract_factory/Factories/PaypalFactory";
 import "animate.css";
 export default function Home() {
   const [showModal, setShowModal] = useState(false); //abrir modal
   const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const hoy = Date.now();
-  const fecha = new Date(hoy);
- 
+  const [tipo, setTipo] = useState("");
+  const [balance, setBalance] = useState("");
+  const [benefit, setBenefit] = useState("");
   const [productos, setProductos] = useState([]);
-  const handleDescription = () => {
-    switch (nombre) {
-      case "Tarjeta de credito":
-        descripcion =
-          "Tarjeta de credito para su uso diario con firma de nuestra empresa";
-        break;
-      case "Paquete de acciones":
-        descripcion =
-          "Paquete de acciones para su uso diario con firma de nuestra empresa";
-        break;
-      case "Acciones directas":
-        descripcion =
-          "Acciones directas para su uso diario con firma de nuestra empresa";
-        break;
-    }
-  };
   /*Subir a la base*/
   const handleBase = (e) => {
     e.preventDefault();
-    handleDescription();
-    //handleFecha()
+    if(nombre === 'MasterCard'){
+      const card = new MasterCardFactory();
+      if(tipo === 'Common'){
+        const comun = card.getCardCommon();
+        balance = comun.balance;
+        benefit= comun.benefits;
+      }else{
+        const gold = card.getCardGold();
+        balance = gold.balance;
+        benefit= gold.benefits;
+      }
+    }
+    if(nombre='PayPal'){
+      const card = new PaypalFactory();
+      if(tipo === 'Common'){
+        const comun = card.getCardCommon();
+        balance = comun.balance;
+        benefit= comun.benefits;
+      }else{
+        const gold = card.getCardGold();
+        balance = gold.balance;
+        benefit= gold.benefits;
+      }
+      
+    }
+    if(nombre='Visa'){
+      const card = new VisaFactory();
+      if(tipo === 'Common'){
+        const comun = card.getCardCommon();
+        balance = comun.balance;
+        benefit= comun.benefits;
+        console.log(balance);
+      }else{
+        const gold = card.getCardGold();
+        balance = gold.balance;
+        benefit= gold.benefits;
+      }
+     
+    }
     const saveproducts = addDoc(collection(db, "Productos"), {
       nombre,
-      descripcion,
-      fecha,
+      balance,
+      benefit,
     });
+    
   };
   /*Obtener productos*/
   const getProducts = async () => {
@@ -96,16 +121,16 @@ export default function Home() {
             <table className={styles.table}>
               <tr className={styles.row}>
                 <td>Nombre</td>
-                <td>Descripción</td>
-                <td>Fecha</td>
+                <td>Beneficios</td>
+                <td>Saldo</td>
                 <td>Borrar</td>
                 <td>Modificar</td>
               </tr>
               {productos.map((producto) => (
                 <tr className={styles.create_row} key={producto.id}>
                   <td>{producto.nombre}</td>
-                  <td>{producto.descripcion}</td>
-                  <td>{producto.fecha.toString()}</td>
+                  <td>{producto.benefit}</td>
+                  <td>{producto.balance.toString()}</td>
                   <td>
                     <svg
                       onClick={() => deleteProducts(producto.id)}
@@ -171,15 +196,21 @@ export default function Home() {
             <form className={styles.producto} onSubmit={handleBase}>
               <label>Escoga un producto: </label>
               <select defaultValue={"Tarjeta de credito"}>
-                <option value="Tarjeta de credito">Tarjeta de credito</option>
-                <option value="Paquete de acciones">Paquete de acciones</option>
-                <option value="Acciones directas">Acciones directas</option>
+                <option value="Visa">Tarjeta visa</option>
+                <option value="MasterCard">Tarjeta masterCard</option>
+                <option value="PayPal">paypal</option>
+              </select>
+              <select defaultValue={"Tipo de Tarjeta"}>
+                <option value="Common">comun</option>
+                <option value="Gold">tarjeta Gold</option>
               </select>
               <button
                 type="submit"
                 className="btn"
-                onClick={(e) =>
-                  setNombre(e.target.parentElement.children[1].value)
+                onClick={(e) =>{
+                  setNombre(e.target.parentElement.children[1].value);
+                  setTipo(e.target.parentElement.children[2].value);
+                }
                 }
               >
                 Enviar

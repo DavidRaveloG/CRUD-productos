@@ -1,14 +1,14 @@
-import CardCommon from "../ConcreteProducts/CardCommon";
-import CardGold from "../ConcreteProducts/CardGold";
+import CardCommon from "../ConcreteProducts/paypalCommon";
+import CardGold from "../ConcreteProducts/paypalGold";
 import ProductsFatory from "./ProductsFactory";
-
+import IGoldenProduct from "../Types/goldProduct"
 class PaypalFactory extends ProductsFatory {
         
-    getCardCommon(): CardCommon{
+    getCardCommon(): IGoldenProduct{
         return new CardCommon();
     }
 
-    getCardGold(): CardGold{
+    getCardGold(): IGoldenProduct{
         return new CardGold();
     }
 }
