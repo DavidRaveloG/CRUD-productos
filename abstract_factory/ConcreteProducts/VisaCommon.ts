@@ -1,6 +1,6 @@
-import CommonProduct from "../Types/commonProduct";
+import IGoldenProduct from "../Types/commonProduct";
 
-class VisaCommon implements CommonProduct {
+class VisaCommon implements IGoldenProduct {
     
     get comission(): number{
         return 0;

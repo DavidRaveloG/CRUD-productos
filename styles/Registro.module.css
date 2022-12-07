@@ -1,5 +1,5 @@
 .Login_box{
-    height: 42rem;
+    height: 70rem;
     width: 32rem;
     position: absolute;
     top: 50%;
@@ -24,7 +24,7 @@
 .Login{
     display: grid;
     grid-template-columns: repeat(1fr,2);
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
 }
 .Login input{
     width: 100%;

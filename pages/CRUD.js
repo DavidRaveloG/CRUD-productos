@@ -4,22 +4,14 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import Header from "../components/header";
 import styles from "../styles/CRUD.module.css";
-import firebase, { db } from "../firebase/config";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
-import { async } from "@firebase/util";
 import factory from "../abstract_factory/Factories/ProductsFactory";
 import MasterCardFactory from "../abstract_factory/Factories/masterCardFactory";
 import VisaFactory from "../abstract_factory/Factories/VisaFactory";
 import PaypalFactory from "../abstract_factory/Factories/PaypalFactory";
 import "animate.css";
-export default function Home() {
+import axios from 'axios';
+import { faAnchorCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+export default function Home({log,setLog,id,setId}) {
   const [showModal, setShowModal] = useState(false); //abrir modal
   const [nombre, setNombre] = useState("");
   const [tipo, setTipo] = useState("");
@@ -27,7 +19,7 @@ export default function Home() {
   const [benefit, setBenefit] = useState("");
   const [productos, setProductos] = useState([]);
   /*Subir a la base*/
-  const handleBase = (e) => {
+   const handleBase = async (e) => {
     e.preventDefault();
     if(nombre === 'MasterCard'){
       const card = new MasterCardFactory();
@@ -41,7 +33,7 @@ export default function Home() {
         benefit= gold.benefits;
       }
     }
-    if(nombre='PayPal'){
+    if(nombre === 'PayPal'){
       const card = new PaypalFactory();
       if(tipo === 'Common'){
         const comun = card.getCardCommon();
@@ -54,7 +46,7 @@ export default function Home() {
       }
       
     }
-    if(nombre='Visa'){
+    if(nombre === 'Visa'){
       const card = new VisaFactory();
       if(tipo === 'Common'){
         const comun = card.getCardCommon();
@@ -66,42 +58,29 @@ export default function Home() {
         balance = gold.balance;
         benefit= gold.benefits;
       }
-     
     }
-    const saveproducts = addDoc(collection(db, "Productos"), {
-      nombre,
-      balance,
-      benefit,
-    });
-    
-  };
-  /*Obtener productos*/
-  const getProducts = async () => {
-    const querySnapshot = await getDocs(collection(db, "Productos"));
-    const docs = [];
-    querySnapshot.forEach((doc) => {
-      docs.push({ ...doc.data(), id: doc.id });
-    });
-    setProductos(docs);
-  };
-  const deleteProducts = async (id) => {
-    if (window.confirm("¿Seguro desea eliminar el registro?")) {
-      await deleteDoc(doc(db, "Productos", id));
-    }
+    await axios.post('http://localhost/3000/db',
+        nombre,
+        tipo,
+        balance,
+        benefit,
+        id
+    );
   };
   const fechaActual = async (fec) => {
     const Nfecha = new Date(fec);
     fec;
   };
-  /*const modifyProducts = async (id) =>{
-    if(window.confirm("¿Seguro desea eliminar el registro?")){
-      await deleteDoc(doc(db, "Productos", id));
-    }
-      
-  }*/
   useEffect(() => {
+    async function getProducts(){
+      const apiEndUrlPoint= 'http://localhost/3000/db';
+      const response = await fetch(apiEndUrlPoint);
+      const res = await response.json();
+      console.log(res.products);
+      setProductos(res.products);  
+    }
     getProducts();
-  });
+  },[]);
   return (
     <>
       <Header></Header>
@@ -118,7 +97,7 @@ export default function Home() {
           </div>
 
           <div class="animate__animated animate__fadeInUp animate__slow">
-            <table className={styles.table}>
+            <tab className={styles.table}>
               <tr className={styles.row}>
                 <td>Nombre</td>
                 <td>Beneficios</td>
@@ -133,7 +112,7 @@ export default function Home() {
                   <td>{producto.balance.toString()}</td>
                   <td>
                     <svg
-                      onClick={() => deleteProducts(producto.id)}
+                      //onClick={}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -192,7 +171,7 @@ export default function Home() {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-            {/*<button  className={styles.close} onClick={()=>setShowModal(false)}></button>*/}
+            {<button  className={styles.close} onClick={()=>setShowModal(false)}></button>}
             <form className={styles.producto} onSubmit={handleBase}>
               <label>Escoga un producto: </label>
               <select defaultValue={"Tarjeta de credito"}>

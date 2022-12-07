@@ -1,6 +1,6 @@
-import CommonProduct from "../Types/commonProduct";
+import IGoldenProduct from "../Types/commonProduct";
 
-class PaypalCommon implements CommonProduct {
+class PaypalCommon implements IGoldenProduct {
     
     get comission(): number{
         return 0;
