@@ -97,17 +97,17 @@ export default function Home({log,setLog,id,setId}) {
           <div class="animate__animated animate__fadeInUp animate__slow">
             <table className={styles.table}>
               <tr className={styles.row}>
+                <td>Id</td>
                 <td>Nombre</td>
-                <td>Beneficios</td>
-                <td>Saldo</td>
+                <td>Id_usuario</td>
                 <td>Borrar</td>
                 <td>Modificar</td>
               </tr>
               {productos.map((producto) => (
                 <tr className={styles.create_row} key={producto.id}>
-                  <td>{producto.nombre}</td>
-                  <td>{producto.benefit}</td>
-                  <td>{producto.balance.toString()}</td>
+                  <td>{producto.id.toString()}</td>
+                  <td>{producto.name}</td>
+                  <td>{producto.id_user.toString()}</td>
                   <td>
                     <svg
                       //onClick={}
