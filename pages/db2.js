@@ -14,11 +14,11 @@ export default async function handler(req, res){
     switch(req.method){
       case 'GET':
         try {
-          const query = "select * from users";
+          const query = "select id, first_name, last_name, email from users";
           const value=[];
           const [data] = await dbConnection.execute(query,value);
           dbConnection.end;
-          res.status(200).json({ employee: data})
+          res.status(200).json({ personas: data})
         } catch (error) {
           return { error };
         }

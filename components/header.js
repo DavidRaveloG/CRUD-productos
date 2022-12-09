@@ -15,7 +15,7 @@ export default function header() {
             <Link href="/CRUD">Productos</Link>
           </li>
           <li>
-            <Link href="/">Idioma</Link>
+            <Link href="/Personas">Idioma</Link>
           </li>
         </ul>
       </nav>
