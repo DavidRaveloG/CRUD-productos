@@ -38,11 +38,11 @@ const [newUser, setNewUser] = useState({
         <form className={styles.Login} onSubmit={handleD}>
           <div className="nombre">
             <h3>Usuario</h3>
-            <input id="Nombre" type="text" className="inpt" name="nombre" value={newUser.user} onChange={handleForm} placeholder="Usuario" required/>
+            <input id="Nombre" type="text" className="inpt" name="nombre" value={newUser.nombre} onChange={handleForm} placeholder="Usuario" required/>
           </div>
           <div className="apellido">
             <h3>Usuario</h3>
-            <input id="apellido" type="text" className="inpt" name="apellido" value={newUser.user} onChange={handleForm} placeholder="Usuario" required/>
+            <input id="apellido" type="text" className="inpt" name="apellido" value={newUser.apellido} onChange={handleForm} placeholder="Usuario" required/>
           </div>
           <div className="contraseña">
             <h3>Contraseña</h3>

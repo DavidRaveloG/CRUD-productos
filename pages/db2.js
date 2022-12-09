@@ -14,7 +14,7 @@ export default async function handler(req, res){
     switch(req.method){
       case 'GET':
         try {
-          const query = "select * from employee";
+          const query = "select * from users";
           const value=[];
           const [data] = await dbConnection.execute(query,value);
           dbConnection.end;
@@ -23,9 +23,9 @@ export default async function handler(req, res){
           return { error };
         }
       case 'POST':
-        const {name,last_name,email,password,gender,address} = req.body;
-        const [result] = await Pool.query("insert into  employee set ?",{
-          name,
+        const {first_name,last_name,email,password,gender,address} = req.body;
+        const [result] = await Pool.query("insert into  users set ?",{
+          first_name,
           last_name,
           email,
           password,
