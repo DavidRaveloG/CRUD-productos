@@ -62,8 +62,6 @@ export default function Home({log,setLog,id,setId}) {
     await axios.post('http://localhost/3000/db',
         nombre,
         tipo,
-        balance,
-        benefit,
         id
     );
   };
@@ -97,7 +95,7 @@ export default function Home({log,setLog,id,setId}) {
           </div>
 
           <div class="animate__animated animate__fadeInUp animate__slow">
-            <tab className={styles.table}>
+            <table className={styles.table}>
               <tr className={styles.row}>
                 <td>Nombre</td>
                 <td>Beneficios</td>

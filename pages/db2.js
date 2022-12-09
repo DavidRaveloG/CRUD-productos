@@ -23,9 +23,10 @@ export default async function handler(req, res){
           return { error };
         }
       case 'POST':
-        const {nombre,email,password,gender,address} = req.body;
+        const {name,last_name,email,password,gender,address} = req.body;
         const [result] = await Pool.query("insert into  employee set ?",{
-          nombre,
+          name,
+          last_name,
           email,
           password,
           gender,

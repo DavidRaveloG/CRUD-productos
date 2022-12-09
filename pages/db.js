@@ -14,7 +14,7 @@ export default async function handler(req, res){
     switch(req.method){
       case 'GET':
         try {
-          const query = "select * from products p, employee e where p.idE=e.id";
+          const query = "select p.id, p.name, CONCAT(e.first_name, ', ' , e.last_name) from products p, employee e where p.idE=e.id";
           const value=[];
           const [data] = await dbConnection.execute(query,value);
           dbConnection.end;

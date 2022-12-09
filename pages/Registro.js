@@ -5,7 +5,8 @@ import styles from '../styles/Registro.module.css'
 export default function Registro() {
 
 const [newUser, setNewUser] = useState({
-    user: "",
+    nombre: "",
+    apellido: "",
     password:"",
     email:"",
     genero:"",
@@ -18,9 +19,15 @@ const [newUser, setNewUser] = useState({
     }))
     console.log(newUser);
   }
-  const handleD =(e)=>{
-    e.preventDefault();
-    console.log(newUser);
+  const handleD = async (e)=>{
+    await axios.post('http://localhost/3000/db',
+        newUser.nombre,
+        newUser.apellido,
+        newUser.password,
+        newUser.email,
+        newUser.genero,
+        newUser.direccion
+    );
   }
 
   return (
@@ -29,9 +36,13 @@ const [newUser, setNewUser] = useState({
       <div className={styles.Login_box}>
         <h2>Registro</h2>
         <form className={styles.Login} onSubmit={handleD}>
-          <div className="Usuario">
+          <div className="nombre">
             <h3>Usuario</h3>
-            <input id="Nombre" type="text" className="inpt" name="user" value={newUser.user} onChange={handleForm} placeholder="Usuario" required/>
+            <input id="Nombre" type="text" className="inpt" name="nombre" value={newUser.user} onChange={handleForm} placeholder="Usuario" required/>
+          </div>
+          <div className="apellido">
+            <h3>Usuario</h3>
+            <input id="apellido" type="text" className="inpt" name="apellido" value={newUser.user} onChange={handleForm} placeholder="Usuario" required/>
           </div>
           <div className="contraseña">
             <h3>Contraseña</h3>
